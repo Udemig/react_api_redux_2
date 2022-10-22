@@ -1,5 +1,5 @@
 function FooterMenu(props) {
-  console.log('>> FOOTER MENU PROPS', props)
+  //console.log('>> FOOTER MENU PROPS', props)
 
   if ( props.loading === true) {
     return (

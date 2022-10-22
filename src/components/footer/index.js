@@ -56,9 +56,9 @@ function Footer(props) {
       return menuItem
     })
   }
-  console.log('>> categoryMenu 1', categoryMenu)
+  //console.log('>> categoryMenu 1', categoryMenu)
   categoryMenu = categoryMenu.slice(0, 5)
-  console.log('>> categoryMenu 2', categoryMenu)
+  //console.log('>> categoryMenu 2', categoryMenu)
 
   return (
     <footer className="pt-4 my-md-5 pt-md-5 border-top">

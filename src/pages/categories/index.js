@@ -3,7 +3,6 @@ import {useParams} from 'react-router-dom'
 function Categories() {
   const params = useParams()
 
-
   return (
     <div>
       Burası kategoriler sayfası.

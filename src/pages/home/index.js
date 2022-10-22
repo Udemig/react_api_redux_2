@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import useApi from '../../hooks/useApi'
 import CategoryBox from './components/category_box'
 import Loading from '../../components/loading'
+import Pagination from '../../components/pagination'
 
 function Home() {
   const api = useApi()
@@ -46,15 +47,13 @@ function Home() {
   if (categories) {
     // kategori listesini componentlere ekle
     categories.map((item, index) => {
-      categoryArray.push(
-        <CategoryBox
-          key={index}
-          id={item.id}
-          name={item.name}
-          href={`#/category/${item.slug}`}
-          image={item.image}
-        />,
-      )
+      categoryArray.push(<CategoryBox
+        key={index}
+        id={item.id}
+        name={item.name}
+        href={`#/category/${item.slug}`}
+        image={item.image}
+      />)
     })
   } else {
     // loading ekranı göster
@@ -64,61 +63,40 @@ function Home() {
   const pageComponents = []
 
   for (let i = 0; i < totalPageCount; i++) {
-    pageComponents.push(
-      <button
-        key={i}
-        onClick={() => setPageStart(i * pageLength)}
-        className="btn btn-primary mx-2">
-        {i}
-      </button>,
-    )
+    pageComponents.push(<button
+      key={i}
+      onClick={() => setPageStart(i * pageLength)}
+      className="btn btn-primary mx-2">
+      {i}
+    </button>)
   }
 
   const lengthSelectComponents = []
   for (let i = 0; i < 3; i++) {
     // 0, 1, 2
 
-    lengthSelectComponents.push(
-      <button
-        key={i}
-        onClick={() => setPageLength((i + 1) * 3)}
-        className="btn btn-primary mx-2">
-        {(i + 1) * 3}
-      </button>,
-    )
+    lengthSelectComponents.push(<button
+      key={i}
+      onClick={() => setPageLength((i + 1) * 3)}
+      className="btn btn-primary mx-2">
+      {(i + 1) * 3}
+    </button>)
   }
 
   return (
     <main>
-      <div className="row mb-3 text-center">
-        <div className="col-12">
-          <h2>
-            Page Count:
-            &nbsp;
-            {totalPageCount}
-          </h2>
-          <br />
+      <Pagination
+        remoteUrl="/public/categories/listMainCategories"
+        title="Categories"
+      />
 
-          Pages:
-          {pageComponents}
-          <br />
+      <hr />
 
-          Rows:
-          {lengthSelectComponents}
-        </div>
-      </div>
+      <Pagination
+        remoteUrl="/public/categories/listMainCategories"
+        title="Blogs"
+      />
 
-      <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        {categoryArray}
-      </div>
-
-      <h2 className="display-6 text-center mb-4">
-        Blogs
-      </h2>
-
-      <div className="table-responsive">
-        Buraya Bloglar Gelsin
-      </div>
     </main>
   )
 }
